@@ -24,6 +24,10 @@ import javax.swing.JFrame;
  *
  * @author Atrament
  */
-public class ExtendedJFrame extends JFrame{
-    
+public class ExtendedJFrame extends JFrame {
+
+    public void extendedMethod() {
+
+    }
+
 }

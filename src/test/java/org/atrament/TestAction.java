@@ -27,21 +27,19 @@ import org.slf4j.LoggerFactory;
  *
  * @author Atrament
  */
-public class TestAction extends ManagedAction{
+public class TestAction extends ManagedAction<ExtendedJFrame> {
+
     private final Logger log = LoggerFactory.getLogger(this.getClass().getName());
-    
-    public TestAction(JFrame mainWindow) {
+
+    public TestAction(ExtendedJFrame mainWindow) {
         super(mainWindow);
     }
-    
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
         log.debug("Test action performed");
         log.debug(e.getActionCommand());
+        controller.extendedMethod();
     }
-    
-    
-    
+
 }

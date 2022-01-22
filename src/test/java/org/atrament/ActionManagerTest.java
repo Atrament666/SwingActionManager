@@ -43,7 +43,7 @@ public class ActionManagerTest {
 
         ActionManager<ManagedAction, ExtendedJFrame> am = new ActionManager<>(new ExtendedJFrame());
         ManagedAction action = am.getAction(TestAction.class);
-        log.debug("Main window type" + action.mainWindow.getClass());
+        log.debug("Main window type" + action.controller.getClass());
         action.actionPerformed(new ActionEvent(this, 0, "Hello test action 1"));
         ManagedAction anotherAction = am.getAction(TestAction.class);
         anotherAction.actionPerformed(new ActionEvent(this, 0, "Hello test action 2"));
