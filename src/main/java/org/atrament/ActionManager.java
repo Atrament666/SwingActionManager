@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ActionManager<T extends ManagedAction, U extends JFrame> {
 
-    private U mainWindow;
+    private U controller;
     private final Map<Class<? extends T>, T> cache;
     private State currentState;
     private final Map<State, List<T>> register;
@@ -45,7 +45,7 @@ public class ActionManager<T extends ManagedAction, U extends JFrame> {
     public ActionManager(U frame) {
         cache = new HashMap<>();
         register = new HashMap<>();
-        mainWindow = frame;
+        controller = frame;
     }
 
     public T getAction(Class<? extends T> clazz) {
@@ -55,8 +55,7 @@ public class ActionManager<T extends ManagedAction, U extends JFrame> {
         } else {
             log.debug("Creating new instance of " + clazz.getSimpleName());
             try {
-                
-                T instance = clazz.getDeclaredConstructor(JFrame.class).newInstance((JFrame)mainWindow);
+                T instance = clazz.getDeclaredConstructor(controller.getClass()).newInstance(controller);
                 cache.put(clazz, instance);
                 return instance;
             } catch (IllegalAccessException | IllegalArgumentException | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException ex) {
@@ -66,9 +65,7 @@ public class ActionManager<T extends ManagedAction, U extends JFrame> {
         }
         return null;
     }
-    
-    
-    
+
     public T getAction(Class<? extends T> clazz, State state) {
         T action = getAction(clazz);
         registerActionEnabledForState(action, state);
@@ -113,12 +110,12 @@ public class ActionManager<T extends ManagedAction, U extends JFrame> {
 
     }
 
-    public U getMainWindow() {
-        return mainWindow;
+    public U getController() {
+        return controller;
     }
 
-    public void setMainWindow(U mainWindow) {
-        this.mainWindow = mainWindow;
+    public void setController(U controller) {
+        this.controller = controller;
     }
 
 }

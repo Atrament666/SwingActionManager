@@ -19,19 +19,22 @@
 package org.atrament;
 
 import javax.swing.AbstractAction;
-import javax.swing.JFrame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  *
  * @author Atrament
+ * @param <T>
  */
-public abstract class ManagedAction<T extends JFrame> extends AbstractAction{
+public abstract class ManagedAction<T> extends AbstractAction{
 
-    protected final T mainWindow;
+    protected T controller;
+    protected final Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
-    public ManagedAction(T mainWindow) {
-        this.mainWindow = mainWindow;
+    public ManagedAction(T aController) {
+        this.controller = aController;
     }
     
     
